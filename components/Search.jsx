@@ -14,7 +14,7 @@ const Search = ({ setSearchTerm }) => {
           backgroundColor: "#78787835",
           width: "40%",
           marginBottom: "5%",
-          minWidth: "400px",
+          minWidth: "330px",
           border: "0.2px solid #6a6a6a",
           borderRadius: "5px",
           boxShadow: "12px 13px 30px 1px rgba(0,0,0,0.17)",
