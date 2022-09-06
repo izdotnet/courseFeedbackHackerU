@@ -69,7 +69,10 @@ const AboutPage = () => {
               }}
             />
           </Divider>
-          React JS, Next JS, Firebase, Material UI, and Vercel
+          <p>
+            React JS <br /> Next JS <br /> Firebase <br /> Material UI <br />
+            Vercel
+          </p>
         </Typography>
       </Box>
     </Container>
