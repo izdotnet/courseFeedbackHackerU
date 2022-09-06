@@ -101,14 +101,16 @@ const StatPage = () => {
   if (!rows) return <div>Loading ...</div>;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", minWidth: "330px" }}>
       <InputLabel
         sx={{
+          minWidth: "330px",
           display: "block",
           width: "100%",
           textAlign: "center",
           backgroundColor: "black",
           color: "white",
+          minWidth: "330px",
         }}
       >
         <Typography
@@ -133,6 +135,7 @@ const StatPage = () => {
               textAlign: "center",
               backgroundColor: "black",
               color: "white",
+              minWidth: "155px",
             }}
           >
             <Typography
@@ -167,6 +170,7 @@ const StatPage = () => {
               textAlign: "center",
               backgroundColor: "black",
               color: "white",
+              minWidth: "155px",
             }}
           >
             <Typography
@@ -194,8 +198,8 @@ const StatPage = () => {
         </Box>
       </Box>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 400 }}>
+      <TableContainer component={Paper} sx={{ minWidth: "330px" }}>
+        <Table sx={{ minWidth: "330px" }}>
           <TableHead>
             <TableRow>
               <StyledTableCell>Course Name</StyledTableCell>
