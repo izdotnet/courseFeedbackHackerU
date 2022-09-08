@@ -58,6 +58,7 @@ const coursePage = ({ data }) => {
   const [submitted, setSubmitted] = React.useState(false);
   const [deleted, setDeleted] = React.useState(false);
   const textRef = React.useRef();
+  const [loading, setLoading] = React.useState(true);
 
   const cid = route.query.cid;
 
@@ -89,11 +90,28 @@ const coursePage = ({ data }) => {
   };
 
   React.useEffect(() => {
-    const unsubscribe = getDocById("courses", cid).then((doc) =>
-      setUpdatedData(doc)
-    );
+    const unsubscribe = getDocById("courses", cid).then((doc) => {
+      setUpdatedData(doc);
+      setLoading(false);
+    });
     return () => unsubscribe;
   }, [submitted]);
+
+  React.useEffect(() => {
+    const unsubscribe = getCollectionData("courses").then((docs) => {
+      docs.forEach((doc) => {
+        if (doc.id === cid) {
+          array.push(doc.data().comments);
+        }
+      });
+      setComments(array);
+    });
+    return () => unsubscribe;
+  }, [submitted]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Card
@@ -240,24 +258,34 @@ const coursePage = ({ data }) => {
 
 export default coursePage;
 
-export async function getStaticProps({ params }) {
+// export async function getStaticProps({ params }) {
+//   const cid = params.cid;
+//   const data = await getDocById("courses", cid);
+//   return {
+//     props: {
+//       data,
+//     },
+//     revalidate: 10,
+//   };
+// }
+
+// export async function getStaticPaths({ params }) {
+//   const data = await getCollectionData("courses");
+//   const ids = data.map((element) => element.id);
+//   const pathsWithParams = ids.map((id) => ({ params: { cid: id } }));
+
+//   return {
+//     paths: pathsWithParams,
+//     fallback: false,
+//   };
+// }
+
+async function getServerSideProps({ params }) {
   const cid = params.cid;
   const data = await getDocById("courses", cid);
   return {
     props: {
       data,
     },
-    revalidate: 10,
-  };
-}
-
-export async function getStaticPaths({ params }) {
-  const data = await getCollectionData("courses");
-  const ids = data.map((element) => element.id);
-  const pathsWithParams = ids.map((id) => ({ params: { cid: id } }));
-
-  return {
-    paths: pathsWithParams,
-    fallback: false,
   };
 }
