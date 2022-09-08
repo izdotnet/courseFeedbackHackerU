@@ -57,7 +57,7 @@ const StatPage = () => {
       setDisabledLength(false);
       return;
     }
-    const filtered = info.filter((item) => item.data().rating === rating);
+    const filtered = info.filter((item) => item.data().rating >= rating);
     setFilteredInfo(filtered);
     setDisabledLength(true);
   };
@@ -155,10 +155,10 @@ const StatPage = () => {
             sx={{ width: "100%", textAlign: "center" }}
           >
             <MenuItem value={"all"}>All</MenuItem>
-            <MenuItem value={1}>One</MenuItem>
-            <MenuItem value={2}>Two</MenuItem>
-            <MenuItem value={3}>Three</MenuItem>
-            <MenuItem value={4}>Four</MenuItem>
+            <MenuItem value={1}>>One</MenuItem>
+            <MenuItem value={2}>>Two</MenuItem>
+            <MenuItem value={3}>>Three</MenuItem>
+            <MenuItem value={4}>>Four</MenuItem>
             <MenuItem value={5}>Five</MenuItem>
           </Select>
         </Box>
